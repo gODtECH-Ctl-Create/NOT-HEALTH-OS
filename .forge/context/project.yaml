@@ -68,13 +68,24 @@ experience:
     - "Responsive desktop, tablet, and mobile experiences."
 
 technical:
-  architecture: "To be defined by HOS-000. The architecture must support modular multi-tenant healthcare organizations, shared platform services, organization isolation, configurable departments, role-based access, audit logging, reporting, and future web, desktop, and mobile clients."
-  stack: []
+  architecture: "TypeScript monorepo with a Next.js web application and NestJS modular-monolith API. PostgreSQL shared-schema multi-tenancy uses immutable organization_id ownership, tenant-aware data-access boundaries, and PostgreSQL Row Level Security as defense in depth. Authentication is behind an OIDC/OAuth 2.0 provider boundary; authorization uses deny-by-default scoped RBAC. REST /api/v1 with OpenAPI is the initial API style. Durable asynchronous work uses a transactional outbox, with Redis/BullMQ introduced only when real job workloads exist."
+  stack:
+    - "TypeScript"
+    - "Next.js"
+    - "NestJS"
+    - "PostgreSQL"
+    - "pnpm workspaces"
+    - "Docker"
+    - "GitHub Actions"
+    - "OpenTelemetry"
+    - "AWS ECS/Fargate"
+    - "AWS RDS"
   integrations:
+    - "OIDC/OAuth 2.0 identity provider"
     - "Payment gateway"
     - "Email service"
     - "SMS provider"
-    - "Cloud infrastructure"
+    - "AWS cloud infrastructure"
     - "Backup infrastructure"
     - "Future desktop synchronization service"
   constraints:
@@ -107,12 +118,19 @@ security:
     - "Regional healthcare and privacy compliance requirements must be finalized before launch."
 
 operations:
-  deployment_target: "To be determined during HOS-000 architecture."
-  environments: []
+  deployment_target: "Containerized AWS deployment using ECS/Fargate for application workloads and RDS PostgreSQL, with region selection deferred until compliance and latency requirements are finalized."
+  environments:
+    - "local"
+    - "dev"
+    - "staging"
+    - "production"
   observability_requirements:
     - "System uptime monitoring."
     - "API response-time monitoring."
     - "Error-rate monitoring."
+    - "Database health monitoring."
+    - "Authentication and authorization failure monitoring."
+    - "Audit pipeline health monitoring."
     - "Backup reliability monitoring."
     - "Future synchronization-success monitoring."
     - "Auditability of operational and security-sensitive actions."
@@ -138,8 +156,7 @@ forge:
     - efficiency
     - verification
   open_questions:
-    - "What is the final technology stack?"
-    - "What is the deployment target and cloud architecture?"
+    - "Which OIDC/OAuth 2.0 identity provider will be selected in HOS-001?"
     - "What are the final pricing tiers?"
     - "What is the final organization verification workflow?"
     - "What are the user limits by subscription plan?"
@@ -147,6 +164,7 @@ forge:
     - "Which payment methods are supported at launch?"
     - "What regional compliance requirements apply to the initial launch market?"
     - "What is the exact mobile application scope?"
+    - "Which AWS region or regions satisfy launch-market latency and data-residency requirements?"
   material_risks:
     - "Healthcare regulations vary by country."
     - "Migration from paper records may be complex."
@@ -155,4 +173,5 @@ forge:
     - "Future offline synchronization may introduce conflicts."
     - "Integration with existing hospital systems may be complex."
     - "Patient and clinical data require strong security and access controls."
-  last_updated: 2026-09-19
+    - "Tenant context or authorization mistakes could expose data across organizations."
+  last_updated: 2026-09-20
