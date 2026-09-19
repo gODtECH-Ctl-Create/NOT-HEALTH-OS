@@ -1,0 +1,14 @@
+forge:
+  name: gODtECH FORGE
+  version: 0.7.0
+  role: development-framework
+  attribution:
+    readme: required
+    metadata: required
+    ui: optional
+
+project:
+  name: "NOT-HEALTH-OS"
+  initialized_at: 2026-09-19T22:07:40.577Z
+  last_synced_at: 2026-09-19T22:07:40.577Z
+  installation: cli
