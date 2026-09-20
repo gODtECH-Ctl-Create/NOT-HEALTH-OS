@@ -1,45 +1,142 @@
 project:
-  name: "NOT-HEALTH-OS"
-  status: discovery
+  name: "HealthOS"
+  status: planning
 
 product:
-  problem: ""
-  users: []
-  value_proposition: ""
-  goals: []
-  non_goals: []
+  problem: "Healthcare organizations often rely on paper records and fragmented systems for clinical, administrative, financial, and operational workflows, creating poor information flow, duplicated work, administrative overhead, and difficulty scaling."
+  users:
+    - "HealthOS Super Administrators"
+    - "Healthcare Organization Administrators"
+    - "Receptionists"
+    - "Doctors"
+    - "Nurses"
+    - "Pharmacists"
+    - "Laboratory Scientists"
+    - "Radiographers"
+    - "Cashiers"
+    - "Accountants"
+    - "Human Resources Officers"
+    - "Inventory Officers"
+    - "Executive Management"
+  value_proposition: "One secure, modular, configurable healthcare operating system that connects clinical, administrative, financial, and operational workflows while allowing organizations to activate only the capabilities they require."
+  goals:
+    - "Digitize healthcare operations."
+    - "Replace fragmented software with one integrated platform."
+    - "Improve operational efficiency."
+    - "Reduce paperwork."
+    - "Improve patient care."
+    - "Support healthcare organizations of different sizes and specialties."
+    - "Enable future healthcare interoperability."
+    - "Support future offline operations through desktop applications."
+    - "Build a scalable healthcare platform for Africa."
+  non_goals:
+    - "Do not create separate hard-coded products for each healthcare organization type."
+    - "Do not implement Phase 2 hospital modules during the initial foundation work."
+    - "Do not implement AI, predictive analytics, telemedicine, marketplace, or other Phase 3 capabilities during Phase 1."
+    - "Do not implement full offline desktop synchronization during the initial web foundation."
 
 market:
-  geography: ""
-  segment: ""
+  geography: "Africa"
+  segment: "B2B healthcare SaaS for hospitals, clinics, laboratories, pharmacies, maternity homes, specialist centers, and future public healthcare organizations."
   competitors: []
-  differentiation: ""
-  evidence: []
+  differentiation: "A unified healthcare operating system rather than isolated EMR, billing, pharmacy, laboratory, HR, or hospital-management products; modular, configurable, workflow-driven, scalable, and designed for future offline operation."
+  evidence:
+    - "HealthOS Product Strategy & Vision v1.0"
+    - "HealthOS Business Requirements Document v1.0"
+    - "HealthOS Product Architecture & Module Blueprint v1.0"
+    - "HealthOS Operational Architecture v1.0"
+    - "HealthOS Master Product Requirements Document v1.0"
 
 experience:
-  platforms: []
-  ux_priorities: []
-  ui_direction: ""
-  accessibility_requirements: []
+  platforms:
+    - "Web — primary initial platform"
+    - "Desktop — roadmap platform for daily operations and future offline capability"
+    - "Mobile — companion experience for notifications, approvals, quick lookups, and limited editing"
+  ux_priorities:
+    - "Department-driven experiences."
+    - "Workflow-driven rather than menu-driven interactions."
+    - "Minimal staff training."
+    - "Simple and consistent navigation."
+    - "Task-oriented dashboards."
+    - "Responsive interfaces."
+    - "Accessible user experiences."
+  ui_direction: "Clean, professional, simple, reliable healthcare interface with strong typography, accessible contrast, minimal visual clutter, and task-oriented departmental workspaces."
+  accessibility_requirements:
+    - "Keyboard navigation."
+    - "Screen reader support where practical."
+    - "High-contrast design options."
+    - "Responsive desktop, tablet, and mobile experiences."
 
 technical:
-  architecture: ""
-  stack: []
-  integrations: []
-  constraints: []
+  architecture: "TypeScript monorepo with a Next.js web application and NestJS modular-monolith API. PostgreSQL shared-schema multi-tenancy uses immutable organization_id ownership, tenant-aware data-access boundaries, and PostgreSQL Row Level Security as defense in depth. Authentication is behind an OIDC/OAuth 2.0 provider boundary; authorization uses deny-by-default scoped RBAC. REST /api/v1 with OpenAPI is the initial API style. Durable asynchronous work uses a transactional outbox, with Redis/BullMQ introduced only when real job workloads exist."
+  stack:
+    - "TypeScript"
+    - "Next.js"
+    - "NestJS"
+    - "PostgreSQL"
+    - "pnpm workspaces"
+    - "Docker"
+    - "GitHub Actions"
+    - "OpenTelemetry"
+    - "AWS ECS/Fargate"
+    - "AWS RDS"
+  integrations:
+    - "OIDC/OAuth 2.0 identity provider"
+    - "Payment gateway"
+    - "Email service"
+    - "SMS provider"
+    - "AWS cloud infrastructure"
+    - "Backup infrastructure"
+    - "Future desktop synchronization service"
+  constraints:
+    - "Organizations must activate only the modules they require."
+    - "Shared functionality must be reused rather than duplicated across modules."
+    - "Every module must respect roles and permissions."
+    - "Every material action must support audit logging."
+    - "Modules must integrate naturally into healthcare workflows."
+    - "Organization-specific workflows must be configurable rather than hard-coded."
+    - "The architecture must scale from a single clinic to multi-branch and government organizations without redesign."
 
 security:
-  risk_level: medium
-  sensitive_data: []
-  compliance_requirements: []
+  risk_level: high
+  sensitive_data:
+    - "Patient identity information"
+    - "Medical records"
+    - "Clinical notes and diagnoses"
+    - "Prescriptions"
+    - "Laboratory results"
+    - "Radiology information"
+    - "Billing and payment information"
+    - "Healthcare staff and user data"
+    - "Authentication and authorization data"
+  compliance_requirements:
+    - "Security and data protection by design."
+    - "Encrypted communication."
+    - "Role-based permissions."
+    - "Session management."
+    - "Comprehensive audit trails."
+    - "Regional healthcare and privacy compliance requirements must be finalized before launch."
 
 operations:
-  deployment_target: ""
-  environments: []
-  observability_requirements: []
+  deployment_target: "Containerized AWS deployment using ECS/Fargate for application workloads and RDS PostgreSQL, with region selection deferred until compliance and latency requirements are finalized."
+  environments:
+    - "local"
+    - "dev"
+    - "staging"
+    - "production"
+  observability_requirements:
+    - "System uptime monitoring."
+    - "API response-time monitoring."
+    - "Error-rate monitoring."
+    - "Database health monitoring."
+    - "Authentication and authorization failure monitoring."
+    - "Audit pipeline health monitoring."
+    - "Backup reliability monitoring."
+    - "Future synchronization-success monitoring."
+    - "Auditability of operational and security-sensitive actions."
 
 branding:
-  product_identity: "NOT-HEALTH-OS"
+  product_identity: "HealthOS"
   forge_provenance:
     readme: required
     metadata: required
@@ -47,7 +144,34 @@ branding:
     wording: "Built with gODtECH FORGE — Framework for Orchestrated Reasoning, Governance & Engineering."
 
 forge:
-  active_modules: []
-  open_questions: []
-  material_risks: []
-  last_updated: 2026-09-19
+  active_modules:
+    - product
+    - architecture
+    - engineering
+    - security
+    - quality
+    - documentation
+    - provenance
+    - git-delivery
+    - efficiency
+    - verification
+  open_questions:
+    - "Which OIDC/OAuth 2.0 identity provider will be selected in HOS-001?"
+    - "What are the final pricing tiers?"
+    - "What is the final organization verification workflow?"
+    - "What are the user limits by subscription plan?"
+    - "What are the offline synchronization rules?"
+    - "Which payment methods are supported at launch?"
+    - "What regional compliance requirements apply to the initial launch market?"
+    - "What is the exact mobile application scope?"
+    - "Which AWS region or regions satisfy launch-market latency and data-residency requirements?"
+  material_risks:
+    - "Healthcare regulations vary by country."
+    - "Migration from paper records may be complex."
+    - "Healthcare staff may resist operational change."
+    - "Legacy data migration may be difficult."
+    - "Future offline synchronization may introduce conflicts."
+    - "Integration with existing hospital systems may be complex."
+    - "Patient and clinical data require strong security and access controls."
+    - "Tenant context or authorization mistakes could expose data across organizations."
+  last_updated: 2026-09-20
