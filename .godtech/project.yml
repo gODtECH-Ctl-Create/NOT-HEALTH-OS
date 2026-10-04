@@ -1,0 +1,9 @@
+project:
+  state: active
+  priority: high
+  current_focus: "HealthOS architecture foundation"
+  next_step: "Complete the accepted architecture foundation before scaffolding clinical modules"
+  blockers:
+    - []
+  status_note: "Planned B2B healthcare operating system; no clinical production capability should be implied."
+  last_worked_on: "2026-10-04"
